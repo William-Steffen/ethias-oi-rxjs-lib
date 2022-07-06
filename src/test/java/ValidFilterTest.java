@@ -80,7 +80,7 @@ public class ValidFilterTest {
     public void testInvalidNestedObjectField() {
         final String invalidField = "postalCde";
         final String filter = "address." + invalidField + "==4000";
-        Optional<ConstraintViolation<CustomAnnotationTestDelegate>> violation = validate(filter);
+        final Optional<ConstraintViolation<CustomAnnotationTestDelegate>> violation = validate(filter);
         assertTrue(violation.isPresent());
         assertTrue(validateConstraintViolationMessage(
                 unknownFieldResource,
@@ -94,7 +94,7 @@ public class ValidFilterTest {
     public void testInvalidNestedObjectFieldWithLogicalNodes() {
         final String invalidField = "postalCde";
         final String filter = "firstname==Steffen or address." + invalidField + "==4000";
-        Optional<ConstraintViolation<CustomAnnotationTestDelegate>> violation = validate(filter);
+        final Optional<ConstraintViolation<CustomAnnotationTestDelegate>> violation = validate(filter);
         assertTrue(violation.isPresent());
         assertTrue(validateConstraintViolationMessage(
                 unknownFieldResource,
@@ -108,7 +108,7 @@ public class ValidFilterTest {
     public void testInvalidNestedObject() {
         final String invalidField = "address";
         final String filter = invalidField + "==4000";
-        Optional<ConstraintViolation<CustomAnnotationTestDelegate>> violation = validate(filter);
+        final Optional<ConstraintViolation<CustomAnnotationTestDelegate>> violation = validate(filter);
         assertTrue(violation.isPresent());
         assertTrue(validateConstraintViolationMessage(
                 invalidNestedObjectResource,
@@ -122,7 +122,7 @@ public class ValidFilterTest {
     public void testInvalidNestedObjectWithLogicalNodes() {
         final String invalidField = "address";
         final String filter = invalidField + "==4000 and firstname==William";
-        Optional<ConstraintViolation<CustomAnnotationTestDelegate>> violation = validate(filter);
+        final Optional<ConstraintViolation<CustomAnnotationTestDelegate>> violation = validate(filter);
         assertTrue(violation.isPresent());
         assertTrue(validateConstraintViolationMessage(
                 invalidNestedObjectResource,
@@ -132,11 +132,11 @@ public class ValidFilterTest {
                 Person.class.getSimpleName()));
     }
 
-    private boolean validateConstraintViolationMessage(String resourcePath,
-                                                       String messagePath,
-                                                       ConstraintViolation<CustomAnnotationTestDelegate> violation,
-                                                       String... fields) {
-        String message = ResourceBundle.getBundle(resourcePath).getString(messagePath);
+    private boolean validateConstraintViolationMessage(final String resourcePath,
+                                                       final String messagePath,
+                                                       final ConstraintViolation<CustomAnnotationTestDelegate> violation,
+                                                       final String... fields) {
+        final String message = ResourceBundle.getBundle(resourcePath).getString(messagePath);
         if (fields.length > 0) {
             return violation
                     .getMessage()
@@ -147,9 +147,9 @@ public class ValidFilterTest {
                 .equals(message);
     }
 
-    private Optional<ConstraintViolation<CustomAnnotationTestDelegate>> validate(String filter) {
-        Method method;
-        String[] parameterValues = {filter};
+    private Optional<ConstraintViolation<CustomAnnotationTestDelegate>> validate(final String filter) {
+        final Method method;
+        final String[] parameterValues = {filter};
         try {
             method = CustomAnnotationTestDelegate.class.getMethod("validateFilterMethod", String.class);
         } catch (NoSuchMethodException e) {

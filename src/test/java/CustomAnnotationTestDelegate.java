@@ -3,6 +3,6 @@ import validator.ValidFilter;
 
 public class CustomAnnotationTestDelegate {
 
-    public void validateFilterMethod(@ValidFilter(clazz = Employee.class) String filter) {
+    public void validateFilterMethod(@ValidFilter(clazz = Employee.class)final String filter) {
     }
 }
